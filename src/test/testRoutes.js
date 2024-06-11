@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const { addTestString, getTestString } = require('./testControllers');
+const { addTestString, getTestString, testLandingPage } = require('./testControllers');
 
 const testRouter = Router();
 
+testRouter.get('/', testLandingPage);
 testRouter.post('/test', addTestString);
-testRouter.get('/test', getTestString);
+testRouter.put('/test', getTestString);
 
 module.exports = testRouter;

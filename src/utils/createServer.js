@@ -1,16 +1,39 @@
 require("dotenv").config();
+const path = require("path");
 const express = require("express");
-const morgan = require('morgan');
+const session = require('express-session');
+var MongoDBStore = require("connect-mongodb-session")(session);
+const passport = require('passport');
+const logger = require('morgan');
 const cors = require('cors');
 const testRouter = require('../test/testRoutes');
+const authRouter = require('../auth/authRoutes');
 const unmatchedRouter = require("../unmatched/unmatchedRoutes");
-
 
 exports.createServer = () => {
   app = express();
+  const store = new MongoDBStore({
+    uri: process.env.MONGO_URI,
+    collection: 'auth0Sessions'
+  })
+
+  store.on('error', (error) => {
+    console.log(error.message);
+  });
+
   app.use(express.json());
   app.use(cors());
-  app.use(morgan('dev'));
+  app.use(logger('dev'));
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(session({
+     secret: process.env.SECRET, 
+     resave: false, 
+     saveUninitialized: true,
+     store: store
+  }));
+  app.use(passport.authenticate('session'));
+
+  app.use("/",authRouter);
   app.use(testRouter);
   //TODO: add new routes
 

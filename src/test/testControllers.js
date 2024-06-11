@@ -17,3 +17,12 @@ exports.getTestString = async (req, res) => {
     res.status(500).send({ error: error.message })
   }
 }
+
+exports.testLandingPage = async (req, res) => {
+  try {
+    res.set("Content-Type", "text/html");
+    res.status(200).send('<h2>Test Landing Page</h2>');
+  } catch (error) {
+    res.status(500).send({ error: error.message })
+  }
+}
