@@ -2,7 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const session = require('express-session');
-var MongoDBStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 const passport = require('passport');
 const logger = require('morgan');
 const cors = require('cors');
@@ -33,7 +33,7 @@ exports.createServer = () => {
   }));
   app.use(passport.authenticate('session'));
 
-  app.use("/",authRouter);
+  app.use(authRouter);
   app.use(testRouter);
   //TODO: add new routes
 

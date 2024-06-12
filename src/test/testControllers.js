@@ -26,3 +26,21 @@ exports.testLandingPage = async (req, res) => {
     res.status(500).send({ error: error.message })
   }
 }
+
+exports.testLoggedInPage = async (req, res) => {
+  try {
+    res.set("Content-Type", "text/html");
+    res.status(200).send("<h2>Test Logged In Page</h2>");
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+exports.testLoggedOutPage = async (req, res) => {
+  try {
+    res.set("Content-Type", "text/html");
+    res.status(200).send("<h2>Test Logged Out Page</h2>");
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
