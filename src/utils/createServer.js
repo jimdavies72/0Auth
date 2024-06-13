@@ -8,6 +8,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const testRouter = require('../test/testRoutes');
 const authRouter = require('../auth/authRoutes');
+const todoRouter = require('../todo/todoRoutes');
 const unmatchedRouter = require("../unmatched/unmatchedRoutes");
 
 exports.createServer = () => {
@@ -34,8 +35,9 @@ exports.createServer = () => {
   app.use(passport.authenticate('session'));
 
   app.use(authRouter);
+  app.use(todoRouter);
   app.use(testRouter);
-  //TODO: add new routes
+  //TODO: add new routes here:
 
   //default for unmatched routes
   app.use(unmatchedRouter);

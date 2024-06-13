@@ -2,7 +2,6 @@ exports.isAuthenticated = (req, res, next) => {
   try {
     // if the user is currently logged in, they can continue to the next controller
     if (req.isAuthenticated()) {
-      console.log("is authenticated");
       next();
       } else {
     // otherwise they are redirected to the login page    

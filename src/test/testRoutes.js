@@ -6,7 +6,8 @@ const testRouter = Router();
 
 testRouter.get('/test/loggedin', testLoggedInPage );
 testRouter.get('/test/loggedout', testLoggedOutPage)
-testRouter.get('/', testLandingPage);
+testRouter.get("/", testLandingPage);
+testRouter.get('/test', getTestString);
 testRouter.post('/test', isAuthenticated, addTestString);
 testRouter.put('/test', getTestString);
 
