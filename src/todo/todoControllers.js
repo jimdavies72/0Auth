@@ -15,8 +15,7 @@ exports.createTodo = async (req, res) => {
 exports.getTodos = async (req, res) => {
   try {
     const todos = await TODO.find({userid: req.body.userid});
-    console.log("rb: ", req.user);
-    res.status(200).send({ data: todos });
+    res.status(200).send({ todos });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

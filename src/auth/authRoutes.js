@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const authRouter = Router();
-const { isNotAuthenticated } = require('../middleware');
+const { setHeaders } = require('../middleware');
 const { login, logout, redirect } = require('./authControllers');
 
-authRouter.get('/login',isNotAuthenticated, login);
-authRouter.get('/oauth2/redirect', redirect);
-authRouter.get('/logout', logout);
+authRouter.get('/login', login);
+authRouter.get("/", redirect);
+authRouter.get("/logout", logout);
 
 module.exports = authRouter;
